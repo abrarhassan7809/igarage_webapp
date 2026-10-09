@@ -1,0 +1,1 @@
+setupFilter("#grid", "#sort");
