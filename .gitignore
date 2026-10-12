@@ -2,4 +2,4 @@
 venv
 .idea
 __pycache__
-igarage_database.db
+app/db_config/igarage_database.db

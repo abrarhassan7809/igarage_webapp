@@ -1,331 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>i Garage — Authorized Apple Reseller</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link href="/static/css/style.css" rel="stylesheet">
-</head>
-<body>
-<!-- Header -->
-<header class="topbar">
-  <div class="container d-flex align-items-center justify-content-between py-2">
-    <div class="d-flex align-items-center gap-2">
-      <button class="btn p-1 d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-label="Open menu"><i class="bi bi-list fs-2"></i></button>
-      <a class="logo" href="/">
-          <img src="/static/img/igarage-logo.jpeg" alt="i Garage" class="brand-img">
-      </a>
-    </div>
-    <nav class="d-none d-lg-flex">
-      <a class="nav-link" href="/iphones/">iPhone</a>
-      <a class="nav-link" href="/accessories/">Accessories</a>
-      <a class="nav-link" href="/services/">Services</a>
-      <a class="nav-link" href="/exchange/">Exchange</a>
-    </nav>
-    <a href="index.html#resellers" class="btn p-1" aria-label="Find a reseller"><i class="bi bi-geo-alt fs-4"></i></a>
-  </div>
-</header>
+{% extends "base.html" %}
 
-<!-- Slide-in menu -->
-<div class="offcanvas offcanvas-start dark" id="menu" tabindex="-1">
-  <div class="offcanvas-header">
-      <span class="logo">
-          <img src="/static/img/igarage-logo.jpeg" alt="i Garage" class="brand-img">
-      </span>
-      <button class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-      <div class="list-group list-group-flush">
-        <a class="list-group-item" data-bs-dismiss="offcanvas" href="/iphones/">iPhone</a>
-        <a class="list-group-item" data-bs-dismiss="offcanvas" href="/accessories/">Accessories</a>
-        <a class="list-group-item" data-bs-dismiss="offcanvas" href="/services/">Services</a>
-        <a class="list-group-item" data-bs-dismiss="offcanvas" href="/exchange/">Exchange</a>
-      </div>
-  </div>
-</div>
-
-<main class="container py-3">
-  <!-- Hero carousel -->
-  <div id="hero" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="4500">
-    <div class="carousel-indicators mb-1">
-        <button data-bs-target="#hero" data-bs-slide-to="0" class=active aria-label="Slide 1"></button>
-        <button data-bs-target="#hero" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button data-bs-target="#hero" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button data-bs-target="#hero" data-bs-slide-to="3" aria-label="Slide 4"></button>
-        <button data-bs-target="#hero" data-bs-slide-to="4" aria-label="Slide 5"></button>
-    </div>
-    <div class="carousel-inner rounded-4">
-      <div class="carousel-item active">
-        <div class="hero-slide s1">
-            <!--
-            <div class="hero-content">
-                <span class="tag">Coming soon</span>
-                <h2>iPhone Pro</h2>
-                <p>Register your interest for launch day.</p>
-                <a href="#products" class="btn btn-light rounded-pill align-self-start">
-                    Register interest
-                </a>
+{% block body %}
+    <main class="container py-3">
+      <!-- Hero carousel -->
+      <div id="hero" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="4500">
+        <div class="carousel-indicators mb-1">
+            <button data-bs-target="#hero" data-bs-slide-to="0" class=active aria-label="Slide 1"></button>
+            <button data-bs-target="#hero" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button data-bs-target="#hero" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button data-bs-target="#hero" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button data-bs-target="#hero" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+        <div class="carousel-inner rounded-4">
+          <div class="carousel-item active">
+            <div class="hero-slide s1">
+                <!--
+                <div class="hero-content">
+                    <span class="tag">Coming soon</span>
+                    <h2>iPhone Pro</h2>
+                    <p>Register your interest for launch day.</p>
+                    <a href="#products" class="btn btn-light rounded-pill align-self-start">
+                        Register interest
+                    </a>
+                </div>
+                -->
+                <div class="hero-image">
+                    <img src="/static/web_img/slide1.jpeg" alt="iPhone Pro">
+                </div>
             </div>
-            -->
-            <div class="hero-image">
-                <img src="/static/web_img/slide1.jpeg" alt="iPhone Pro">
+          </div>
+          <div class="carousel-item">
+              <div class="hero-slide s2">
+                  <!--
+                  <div class="hero-content">
+                      <span class="tag">New prices</span>
+                      <h2>Special Offers</h2>
+                      <p>PTA-approved with local warranty.</p>
+                      <a href="#compare" class="btn btn-light rounded-pill align-self-start">See prices</a>
+                  </div>
+                  -->
+                  <div class="hero-image">
+                      <img src="/static/web_img/slide2.jpeg" alt="iPhone Pro">
+                  </div>
+              </div>
+          </div>
+          <div class="carousel-item">
+              <div class="hero-slide s3">
+                  <!--
+                  <div class="hero-content">
+                      <span class="tag">Move in Future</span>
+                      <h2>Special Offers</h2>
+                      <p>Extended warranty on eligible Macs.</p>
+                      <a href="#offers" class="btn btn-light rounded-pill align-self-start">View offers</a>
+                  </div>
+                  -->
+                  <div class="hero-image">
+                      <img src="/static/web_img/slide3.jpeg" alt="iPhone Pro">
+                  </div>
+              </div>
+          </div>
+          <div class="carousel-item">
+              <div class="hero-slide s4">
+                  <!--
+                  <div class="hero-content">
+                      <span class="tag">Add new feutrue</span>
+                      <h2>Special Offers</h2>
+                      <p>Extended warranty on eligible Macs.</p>
+                      <a href="#offers" class="btn btn-light rounded-pill align-self-start">View offers</a>
+                  </div>
+                  -->
+                  <div class="hero-image">
+                      <img src="/static/web_img/slide4.jpeg" alt="iPhone Pro">
+                  </div>
+              </div>
+          </div>
+          <div class="carousel-item">
+              <div class="hero-slide s5">
+                  <!--
+                  <div class="hero-content">
+                      <span class="tag">Add new feutrue</span>
+                      <h2>Special Offers</h2>
+                      <p>Extended warranty on eligible Macs.</p>
+                      <a href="#offers" class="btn btn-light rounded-pill align-self-start">View offers</a>
+                  </div>
+                  -->
+                  <div class="hero-image">
+                      <img src="/static/web_img/slide5.jpeg" alt="iPhone Pro">
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="row g-2 text-center trust mb-4">
+          <div class="col-4"><i class="bi bi-patch-check"></i>
+              <div class="small mt-1">Official warranty</div>
+          </div>
+          <div class="col-4">
+              <i class="bi bi-phone"></i>
+              <div class="small mt-1">PTA approved</div>
+          </div>
+          <div class="col-4">
+              <i class="bi bi-shop"></i>
+              <div class="small mt-1">Trusted resellers</div>
+          </div>
+      </div>
+
+      <!-- Category -->
+      <section id="products" class="mb-5">
+        <h2 class="section-title h4">Effortless Apple experience</h2>
+        <p class="text-secondary">The full Apple lineup, in one place.</p>
+        <div class="chips mx-n3 mb-3" id="chips">
+            <button class="chip active" data-value="All">All</button>
+            <button class="chip" data-value="iPhone">iPhone</button>
+            <button class="chip" data-value="iPad">iPad</button>
+            <button class="chip" data-value="Mac">Mac</button>
+            <button class="chip" data-value="Watch">Watch</button>
+            <button class="chip" data-value="AirPods">AirPods</button>
+            <button class="chip" data-value="Accessories">Accessories</button>
+        </div>
+
+        <div class="row g-3" id="grid">
+            <!-- category list1 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18Duo" data-name="18 Duo  (Coming Soon)" data-price="449999" data-display="6.3&quot; OLED" data-chip="18 Duo  (Coming Soon)" data-storage="256GB">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/18_duo.jpeg" alt="18 Duo  (Coming Soon)" loading="lazy"></div>
+                <!-- <small>iPhone</small> -->
+                  <h3 class="mb-2">18 Duo  (Coming Soon)</h3>
+                <!-- <div class="price">Rs 449,999</div> -->
+                <a href="/product_details/?p_id=1" class="btn btn-brand btn-sm mt-auto" data-compare="18 Duo  (Coming Soon)">Details</a>
+              </div>
             </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-          <div class="hero-slide s2">
-              <!--
-              <div class="hero-content">
-                  <span class="tag">New prices</span>
-                  <h2>Special Offers</h2>
-                  <p>PTA-approved with local warranty.</p>
-                  <a href="#compare" class="btn btn-light rounded-pill align-self-start">See prices</a>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18ProMax" data-name="18 Pro Max" data-price="189999" data-display="6.1&quot; OLED" data-chip="18 Pro Max" data-storage="256GB">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/18_pro_max_burgundy.jpeg" alt="18 Pro Max" loading="lazy"></div>
+                <!-- <small>18 Pro Max</small> -->
+                  <h3 class="mb-2">18 Pro Max</h3>
+                <!-- <div class="price">Rs 189,999</div> -->
+                <a href="/product_details/?p_id=2" class="btn btn-brand btn-sm mt-auto" data-compare="18 Pro Max">Details</a>
               </div>
-              -->
-              <div class="hero-image">
-                  <img src="/static/web_img/slide2.jpeg" alt="iPhone Pro">
-              </div>
-          </div>
-      </div>
-      <div class="carousel-item">
-          <div class="hero-slide s3">
-              <!--
-              <div class="hero-content">
-                  <span class="tag">Move in Future</span>
-                  <h2>Special Offers</h2>
-                  <p>Extended warranty on eligible Macs.</p>
-                  <a href="#offers" class="btn btn-light rounded-pill align-self-start">View offers</a>
-              </div>
-              -->
-              <div class="hero-image">
-                  <img src="/static/web_img/slide3.jpeg" alt="iPhone Pro">
-              </div>
-          </div>
-      </div>
-      <div class="carousel-item">
-          <div class="hero-slide s4">
-              <!--
-              <div class="hero-content">
-                  <span class="tag">Add new feutrue</span>
-                  <h2>Special Offers</h2>
-                  <p>Extended warranty on eligible Macs.</p>
-                  <a href="#offers" class="btn btn-light rounded-pill align-self-start">View offers</a>
-              </div>
-              -->
-              <div class="hero-image">
-                  <img src="/static/web_img/slide4.jpeg" alt="iPhone Pro">
-              </div>
-          </div>
-      </div>
-      <div class="carousel-item">
-          <div class="hero-slide s5">
-              <!--
-              <div class="hero-content">
-                  <span class="tag">Add new feutrue</span>
-                  <h2>Special Offers</h2>
-                  <p>Extended warranty on eligible Macs.</p>
-                  <a href="#offers" class="btn btn-light rounded-pill align-self-start">View offers</a>
-              </div>
-              -->
-              <div class="hero-image">
-                  <img src="/static/web_img/slide5.jpeg" alt="iPhone Pro">
-              </div>
-          </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Trust strip -->
-  <div class="row g-2 text-center trust mb-4">
-      <div class="col-4"><i class="bi bi-patch-check"></i>
-          <div class="small mt-1">Official warranty</div>
-      </div>
-      <div class="col-4">
-          <i class="bi bi-phone"></i>
-          <div class="small mt-1">PTA approved</div>
-      </div>
-      <div class="col-4">
-          <i class="bi bi-shop"></i>
-          <div class="small mt-1">Trusted resellers</div>
-      </div>
-  </div>
-
-  <!-- Products (data lives in the data-* attributes of each card) -->
-  <section id="products" class="mb-5">
-    <h2 class="section-title h4">Effortless Apple experience</h2>
-    <p class="text-secondary">The full Apple lineup, in one place.</p>
-    <div class="chips mx-n3 mb-3" id="chips">
-        <button class="chip active" data-value="All">All</button>
-        <button class="chip" data-value="iPhone">iPhone</button>
-        <button class="chip" data-value="iPad">iPad</button>
-        <button class="chip" data-value="Mac">Mac</button>
-        <button class="chip" data-value="Watch">Watch</button>
-        <button class="chip" data-value="AirPods">AirPods</button>
-        <button class="chip" data-value="Accessories">Accessories</button>
-    </div>
-
-    <div class="row g-3" id="grid">
-        <!-- slide1 -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18Duo" data-name="18 Duo  (Coming Soon)" data-price="449999" data-display="6.3&quot; OLED" data-chip="18 Duo  (Coming Soon)" data-storage="256GB">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/18_duo.jpeg" alt="18 Duo  (Coming Soon)" loading="lazy"></div>
-            <!-- <small>iPhone</small> -->
-              <h3 class="mb-2">18 Duo  (Coming Soon)</h3>
-            <!-- <div class="price">Rs 449,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="18 Duo  (Coming Soon)">Details</button>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18ProMax" data-name="18 Pro Max" data-price="189999" data-display="6.1&quot; OLED" data-chip="18 Pro Max" data-storage="256GB">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/18_pro_max_burgundy.jpeg" alt="18 Pro Max" loading="lazy"></div>
-            <!-- <small>18 Pro Max</small> -->
-              <h3 class="mb-2">18 Pro Max</h3>
-            <!-- <div class="price">Rs 189,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="18 Pro Max">Details</button>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18Pro" data-name="18Pro" data-price="199999" data-display="11&quot; Liquid Retina" data-chip="18Pro" data-storage="128GB">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/18_pro_glacier.jpeg" alt="18Pro" loading="lazy"></div>
-            <!-- <small>18 Pro</small> -->
-              <h3 class="mb-2">18 Pro</h3>
-            <!-- <div class="price">Rs 199,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="18 Pro">Details</button>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17ProMax" data-name="17ProMax" data-price="119999" data-display="11&quot; Liquid Retina" data-chip="17ProMax" data-storage="128GB">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/17_pro_max_orange.jpeg" alt="17 Pro Max" loading="lazy"></div>
-            <!-- <small>17 Pro Max</small> -->
-              <h3 class="mb-2">17 Pro Max</h3>
-            <!-- <div class="price">Rs 119,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="17 Pro Max">Details</button>
-          </div>
-        </div>
-
-        <!-- slide2 -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17Pro" data-name="17Pro" data-price="199999" data-display="11&quot; Liquid Retina" data-chip="17Pro" data-storage="128GB">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/17_pro.jpeg" alt="18 Pro" loading="lazy"></div>
-            <!-- <small>17 Pro</small> -->
-              <h3 class="mb-2">17 Pro</h3>
-            <!-- <div class="price">Rs 199,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="17Pro">Details</button>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17Air" data-name="17 Air" data-price="119999" data-display="11&quot; Liquid Retina" data-chip="17 Air" data-storage="128GB">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/17_air.jpeg" alt="17 Air" loading="lazy"></div>
-            <!-- <small>17 Air</small> -->
-              <h3 class="mb-2">17 Air</h3>
-            <!-- <div class="price">Rs 119,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="17 Air">Details</button>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="AppleWatches" data-name="Watch Series 11" data-price="109999" data-display="Always-on OLED" data-chip="Apple Watches" data-storage="64GB">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/apple_watch.jpeg" alt="Apple Watches" loading="lazy"></div>
-            <!-- <small>Watch</small> -->
-              <h3 class="mb-2">Apple Watches</h3>
-            <!-- <div class="price">Rs 109,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="Watch Series 11">Details</button>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="AppleAirPods" data-name="AppleAirPods" data-price="69999" data-display="AppleAirPods" data-chip="H2" data-storage="—">
-          <div class="pcard">
-            <div class="pimg"><img src="/static/web_img/apple_air_pods.jpeg" alt="Apple Accessory" loading="lazy"></div>
-            <!-- <small>AirPods</small> -->
-              <h3 class="mb-2">Apple AirPods</h3>
-            <!-- <div class="price">Rs 69,999</div> -->
-            <button class="btn btn-brand btn-sm mt-auto" data-compare="Apple AirPods">Details</button>
-          </div>
-        </div>
-
-        <!-- slide3 -->
-    </div>
-  </section>
-
-    <!-- Compare (reads the cards above) -->
-    <!-- <section id="compare" class="mb-5">
-        <div class="panel">
-            <h2 class="section-title h4">Selection made easy</h2>
-            <p class="text-secondary">Pick any two products to compare.</p>
-            <div class="row g-2 mb-3">
-              <div class="col-6"><select id="cmpA" class="form-select" aria-label="First product"></select></div>
-              <div class="col-6"><select id="cmpB" class="form-select" aria-label="Second product"></select></div>
             </div>
-            <div class="table-responsive"><table class="table compare-table mb-0" id="cmpTable"></table></div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18Pro" data-name="18Pro" data-price="199999" data-display="11&quot; Liquid Retina" data-chip="18Pro" data-storage="128GB">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/18_pro_glacier.jpeg" alt="18Pro" loading="lazy"></div>
+                <!-- <small>18 Pro</small> -->
+                  <h3 class="mb-2">18 Pro</h3>
+                <!-- <div class="price">Rs 199,999</div> -->
+                <a href="/product_details/?p_id=3" class="btn btn-brand btn-sm mt-auto" data-compare="18 Pro">Details</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17ProMax" data-name="17ProMax" data-price="119999" data-display="11&quot; Liquid Retina" data-chip="17ProMax" data-storage="128GB">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/17_pro_max_orange.jpeg" alt="17 Pro Max" loading="lazy"></div>
+                <!-- <small>17 Pro Max</small> -->
+                  <h3 class="mb-2">17 Pro Max</h3>
+                <!-- <div class="price">Rs 119,999</div> -->
+                <a href="/product_details/?p_id=4" class="btn btn-brand btn-sm mt-auto" data-compare="17 Pro Max">Details</a>
+              </div>
+            </div>
+
+            <!-- category list2 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17Pro" data-name="17Pro" data-price="199999" data-display="11&quot; Liquid Retina" data-chip="17Pro" data-storage="128GB">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/17_pro.jpeg" alt="18 Pro" loading="lazy"></div>
+                <!-- <small>17 Pro</small> -->
+                  <h3 class="mb-2">17 Pro</h3>
+                <!-- <div class="price">Rs 199,999</div> -->
+                <a href="/product_details/?p_id=5" class="btn btn-brand btn-sm mt-auto" data-compare="17Pro">Details</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17Air" data-name="17 Air" data-price="119999" data-display="11&quot; Liquid Retina" data-chip="17 Air" data-storage="128GB">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/17_air.jpeg" alt="17 Air" loading="lazy"></div>
+                <!-- <small>17 Air</small> -->
+                  <h3 class="mb-2">17 Air</h3>
+                <!-- <div class="price">Rs 119,999</div> -->
+                <a href="/product_details/?p_id=6" class="btn btn-brand btn-sm mt-auto" data-compare="17 Air">Details</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="AppleWatches" data-name="Watch Series 11" data-price="109999" data-display="Always-on OLED" data-chip="Apple Watches" data-storage="64GB">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/apple_watch.jpeg" alt="Apple Watches" loading="lazy"></div>
+                <!-- <small>Watch</small> -->
+                  <h3 class="mb-2">Apple Watches</h3>
+                <!-- <div class="price">Rs 109,999</div> -->
+                <a href="/product_details/?p_id=7" class="btn btn-brand btn-sm mt-auto" data-compare="Watch Series 11">Details</a>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="AppleAirPods" data-name="AppleAirPods" data-price="69999" data-display="AppleAirPods" data-chip="H2" data-storage="—">
+              <div class="pcard">
+                <div class="pimg"><img src="/static/web_img/apple_air_pods.jpeg" alt="Apple Accessory" loading="lazy"></div>
+                <!-- <small>AirPods</small> -->
+                  <h3 class="mb-2">Apple AirPods</h3>
+                <!-- <div class="price">Rs 69,999</div> -->
+                <a href="/product_details/?p_id=8" class="btn btn-brand btn-sm mt-auto" data-compare="Apple AirPods">Details</a>
+              </div>
+            </div>
+
+            <!-- category list1 -->
         </div>
-    </section> -->
+      </section>
 
-  <!-- Offers -->
-  <section id="offers" class="mb-5">
-    <h2 class="section-title h4">Latest offers</h2>
-    <div class="rail">
-        <div class="panel news-card"><i class="bi bi-arrow-repeat fs-3 text-primary"></i><h3 class="h6 mt-2">iPhone trade-in</h3><p class="small text-secondary mb-0">Exchange a PTA-approved iPhone and pay only the difference.</p></div>
-        <div class="panel news-card"><i class="bi bi-shield-check fs-3 text-primary"></i><h3 class="h6 mt-2">Protection plan</h3><p class="small text-secondary mb-0">Cover for accidents and liquid damage on iPhone.</p></div>
-        <!-- <div class="panel news-card"><i class="bi bi-mortarboard fs-3 text-primary"></i><h3 class="h6 mt-2">Student pricing</h3><p class="small text-secondary mb-0">Special Mac prices with a longer warranty.</p></div> -->
-    </div>
-  </section>
+        <!-- Compare (reads the cards above) -->
+        <!-- <section id="compare" class="mb-5">
+            <div class="panel">
+                <h2 class="section-title h4">Selection made easy</h2>
+                <p class="text-secondary">Pick any two products to compare.</p>
+                <div class="row g-2 mb-3">
+                  <div class="col-6"><select id="cmpA" class="form-select" aria-label="First product"></select></div>
+                  <div class="col-6"><select id="cmpB" class="form-select" aria-label="Second product"></select></div>
+                </div>
+                <div class="table-responsive"><table class="table compare-table mb-0" id="cmpTable"></table></div>
+            </div>
+        </section> -->
 
-  <!-- Resellers (calls GET /api/stores) -->
-  <section id="resellers" class="mb-5"><div class="panel text-center">
-    <i class="bi bi-geo-alt-fill fs-1 text-primary"></i>
-    <h2 class="section-title h4">Buy from trusted resellers</h2>
-    <p class="text-secondary">Shop No.28, 2nd Floor, Singapur Plaza, Saddar Rawalpindi</p>
-    <p class="text-secondary">Contact Us: 0515120114</p>
-    <div class="input-group mb-2">
-      <input id="city" class="form-control" placeholder="Enter your city" aria-label="City">
-      <button class="btn btn-brand" id="findBtn">Find stores</button>
-    </div>
-    <div id="cityResult" class="small text-secondary" aria-live="polite"></div>
-  </div></section>
-</main>
+      <!-- Offers -->
+      <section id="offers" class="mb-5">
+        <h2 class="section-title h4">Latest offers</h2>
+        <div class="rail">
+            <div class="panel news-card"><i class="bi bi-arrow-repeat fs-3 text-primary"></i><h3 class="h6 mt-2">iPhone trade-in</h3><p class="small text-secondary mb-0">Exchange a PTA-approved iPhone and pay only the difference.</p></div>
+            <div class="panel news-card"><i class="bi bi-shield-check fs-3 text-primary"></i><h3 class="h6 mt-2">Protection plan</h3><p class="small text-secondary mb-0">Cover for accidents and liquid damage on iPhone.</p></div>
+            <!-- <div class="panel news-card"><i class="bi bi-mortarboard fs-3 text-primary"></i><h3 class="h6 mt-2">Student pricing</h3><p class="small text-secondary mb-0">Special Mac prices with a longer warranty.</p></div> -->
+        </div>
+      </section>
 
-<!-- Footer -->
-<footer class="pt-4"><div class="container">
-  <div class="row g-4 pb-4">
-    <div class="col-6 col-md-4"><h3>Shop Now</h3><ul>
-        <li><a href="">iPhone</a></li>
-        <li><a href="index.html#products">Accessories</a></li>
-        <li><a href="index.html#offers">Services</a></li>
-        <li><a href="index.html#offers">Exchange</a></li>
-    </ul></div>
-    <div class="col-6 col-md-4">
-        <h3>Quick Links &amp; Support</h3>
-        <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms &amp; Conditions</a></li>
-        </ul>
-    </div>
-    <div class="col-12 col-md-4"><h3>Connect With Us</h3>
-      <div class="d-flex gap-2 social mb-3">
-        <a href="https://www.facebook.com/profile.php?id=61594267503764" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-        <!-- <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a> -->
-        <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      </div>
-      <form id="subForm" class="input-group" novalidate>
-        <input id="email" type="email" class="form-control" placeholder="Your email" aria-label="Email">
-        <button class="btn btn-brand" type="submit">Subscribe</button>
-      </form>
-      <div id="subMsg" class="small mt-1" aria-live="polite"></div>
-    </div>
-  </div>
-  <div class="foot-bottom py-3 text-center"><small>&copy; 2026 i Garage. All rights reserved.</small></div>
-</div></footer>
+      <!-- Resellers (calls GET /api/stores) -->
+      <section id="resellers" class="mb-5"><div class="panel text-center">
+        <i class="bi bi-geo-alt-fill fs-1 text-primary"></i>
+        <h2 class="section-title h4">Buy from trusted resellers</h2>
+        <p class="text-secondary">Shop No.28, 2nd Floor, Singapur Plaza, Saddar Rawalpindi</p>
+        <p class="text-secondary">Contact Us: 0515120114</p>
+        <div class="input-group mb-2">
+          <input id="city" class="form-control" placeholder="Enter your city" aria-label="City">
+          <button class="btn btn-brand" id="findBtn">Find stores</button>
+        </div>
+        <div id="cityResult" class="small text-secondary" aria-live="polite"></div>
+      </div></section>
+    </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/static/js/main.js"></script>
-<script src="/static/js/home.js"></script>
-</body>
-</html>
+{% endblock %}
