@@ -103,14 +103,16 @@
           </div>
           <div class="col-4">
               <i class="bi bi-shop"></i>
-              <div class="small mt-1">Trusted resellers</div>
+              <div class="small mt-1">Trusted wholesaler</div>
           </div>
       </div>
 
-      <!-- Category -->
+      <!-- Category Section -->
       <section id="products" class="mb-5">
         <h2 class="section-title h4">Effortless Apple experience</h2>
         <p class="text-secondary">The full Apple lineup, in one place.</p>
+
+        <!-- Category Filter Chips -->
         <div class="chips mx-n3 mb-3" id="chips">
             <button class="chip active" data-value="All">All</button>
             <button class="chip" data-value="iPhone">iPhone</button>
@@ -121,90 +123,31 @@
             <button class="chip" data-value="Accessories">Accessories</button>
         </div>
 
+        <!-- Product Cards Grid -->
         <div class="row g-3" id="grid">
-            <!-- category list1 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18Duo" data-name="18 Duo  (Coming Soon)" data-price="449999" data-display="6.3&quot; OLED" data-chip="18 Duo  (Coming Soon)" data-storage="256GB">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/18_duo.jpeg" alt="18 Duo  (Coming Soon)" loading="lazy"></div>
-                <!-- <small>iPhone</small> -->
-                  <h3 class="mb-2">18 Duo  (Coming Soon)</h3>
-                <!-- <div class="price">Rs 449,999</div> -->
-                <a href="/product_details/?p_id=1" class="btn btn-brand btn-sm mt-auto" data-compare="18 Duo  (Coming Soon)">Details</a>
+            {% for product in index_products %}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3"
+                 data-cat="{{ product.category }}"
+                 data-name="{{ product.name }}"
+                 data-price="{{ product.price }}"
+                 data-display="{{ product.display }}"
+                 data-chip="{{ product.chip }}"
+                 data-storage="{{ product.storage }}">
+              <div class="pcard h-100 d-flex flex-column">
+                <div class="pimg">
+                    <img src="{{ product.image }}" alt="{{ product.name }}" loading="lazy">
+                </div>
+                <h3 class="mb-2">{{ product.name }}</h3>
+
+                <!-- Conditionally show Details button only if ID is NOT 1 (or category is not 18Duo) -->
+                {% if product.id != 1 %}
+                <a href="/product_details/?p_id={{ product.id }}" class="btn btn-brand btn-sm mt-auto" data-compare="{{ product.name }}">Details</a>
+                {% else %}
+                <span class="badge bg-secondary text-white mt-auto py-2">Coming Soon</span>
+                {% endif %}
               </div>
             </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18ProMax" data-name="18 Pro Max" data-price="189999" data-display="6.1&quot; OLED" data-chip="18 Pro Max" data-storage="256GB">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/18_pro_max_burgundy.jpeg" alt="18 Pro Max" loading="lazy"></div>
-                <!-- <small>18 Pro Max</small> -->
-                  <h3 class="mb-2">18 Pro Max</h3>
-                <!-- <div class="price">Rs 189,999</div> -->
-                <a href="/product_details/?p_id=2" class="btn btn-brand btn-sm mt-auto" data-compare="18 Pro Max">Details</a>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="18Pro" data-name="18Pro" data-price="199999" data-display="11&quot; Liquid Retina" data-chip="18Pro" data-storage="128GB">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/18_pro_glacier.jpeg" alt="18Pro" loading="lazy"></div>
-                <!-- <small>18 Pro</small> -->
-                  <h3 class="mb-2">18 Pro</h3>
-                <!-- <div class="price">Rs 199,999</div> -->
-                <a href="/product_details/?p_id=3" class="btn btn-brand btn-sm mt-auto" data-compare="18 Pro">Details</a>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17ProMax" data-name="17ProMax" data-price="119999" data-display="11&quot; Liquid Retina" data-chip="17ProMax" data-storage="128GB">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/17_pro_max_orange.jpeg" alt="17 Pro Max" loading="lazy"></div>
-                <!-- <small>17 Pro Max</small> -->
-                  <h3 class="mb-2">17 Pro Max</h3>
-                <!-- <div class="price">Rs 119,999</div> -->
-                <a href="/product_details/?p_id=4" class="btn btn-brand btn-sm mt-auto" data-compare="17 Pro Max">Details</a>
-              </div>
-            </div>
-
-            <!-- category list2 -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17Pro" data-name="17Pro" data-price="199999" data-display="11&quot; Liquid Retina" data-chip="17Pro" data-storage="128GB">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/17_pro.jpeg" alt="18 Pro" loading="lazy"></div>
-                <!-- <small>17 Pro</small> -->
-                  <h3 class="mb-2">17 Pro</h3>
-                <!-- <div class="price">Rs 199,999</div> -->
-                <a href="/product_details/?p_id=5" class="btn btn-brand btn-sm mt-auto" data-compare="17Pro">Details</a>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="17Air" data-name="17 Air" data-price="119999" data-display="11&quot; Liquid Retina" data-chip="17 Air" data-storage="128GB">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/17_air.jpeg" alt="17 Air" loading="lazy"></div>
-                <!-- <small>17 Air</small> -->
-                  <h3 class="mb-2">17 Air</h3>
-                <!-- <div class="price">Rs 119,999</div> -->
-                <a href="/product_details/?p_id=6" class="btn btn-brand btn-sm mt-auto" data-compare="17 Air">Details</a>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="AppleWatches" data-name="Watch Series 11" data-price="109999" data-display="Always-on OLED" data-chip="Apple Watches" data-storage="64GB">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/apple_watch.jpeg" alt="Apple Watches" loading="lazy"></div>
-                <!-- <small>Watch</small> -->
-                  <h3 class="mb-2">Apple Watches</h3>
-                <!-- <div class="price">Rs 109,999</div> -->
-                <a href="/product_details/?p_id=7" class="btn btn-brand btn-sm mt-auto" data-compare="Watch Series 11">Details</a>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-cat="AppleAirPods" data-name="AppleAirPods" data-price="69999" data-display="AppleAirPods" data-chip="H2" data-storage="—">
-              <div class="pcard">
-                <div class="pimg"><img src="/static/web_img/apple_air_pods.jpeg" alt="Apple Accessory" loading="lazy"></div>
-                <!-- <small>AirPods</small> -->
-                  <h3 class="mb-2">Apple AirPods</h3>
-                <!-- <div class="price">Rs 69,999</div> -->
-                <a href="/product_details/?p_id=8" class="btn btn-brand btn-sm mt-auto" data-compare="Apple AirPods">Details</a>
-              </div>
-            </div>
-
-            <!-- category list1 -->
+            {% endfor %}
         </div>
       </section>
 
@@ -235,7 +178,7 @@
       <section id="resellers" class="mb-5"><div class="panel text-center">
         <i class="bi bi-geo-alt-fill fs-1 text-primary"></i>
         <h2 class="section-title h4">Buy from trusted resellers</h2>
-        <p class="text-secondary">Shop No.28, 2nd Floor, Singapur Plaza, Saddar Rawalpindi</p>
+        <p class="text-secondary">Rania Mall, Sadar Bazar, Rawalpindi, Pakistan</p>
         <p class="text-secondary">Contact Us: 0515120114</p>
         <div class="input-group mb-2">
           <input id="city" class="form-control" placeholder="Enter your city" aria-label="City">

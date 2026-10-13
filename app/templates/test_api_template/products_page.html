@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <main class="container py-3">
+      <nav class="crumb mb-2"><a href="/">Home</a> / {{ category_name }}</nav>
+      <div class="page-hero mb-4">
+        <h1>iPhone</h1>
+        <p class="mb-0 opacity-75">PTA-approved iPhones with official warranty. Choose your model, color and storage.</p>
+      </div>
+      <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between mb-3">
+        <div class="chips mx-n3 mb-3" id="chips"><button class="chip active" data-value="All">All</button><button class="chip" data-value="iPhone 18">iPhone 18</button><button class="chip" data-value="iPhone 17">iPhone 17</button><button class="chip" data-value="iPhone Air">iPhone Air</button><button class="chip" data-value="iPhone 17e">iPhone 17e</button></div>
+        <select id="sort" class="form-select w-auto" aria-label="Sort">
+          <option value="def">Sort: Featured</option>
+          <option value="asc">Price: low to high</option>
+          <option value="desc">Price: high to low</option>
+        </select>
+      </div>
+      <div class="small text-secondary mb-2" id="count" aria-live="polite"></div>
+      <div class="row g-3 mb-5" id="grid">
+        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 18" data-price="549999">
+          <div class="pcard">
+            <div class="pimg pimg-emoji">📱</div>
+            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 18 Pro Max</h3><span class="badge-pta">PTA approved</span></div>
+            <small>3 colors · 3 storage options</small>
+            <div class="price">From Rs 549,999</div>
+            <a href="/product_details/" class="btn btn-brand mt-auto">Details</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 18" data-price="479999">
+          <div class="pcard">
+            <div class="pimg pimg-emoji">📱</div>
+            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 18 Pro</h3><span class="badge-pta">PTA approved</span></div>
+            <small>3 colors · 3 storage options</small>
+            <div class="price">From Rs 479,999</div>
+            <a href="product_details.html?model=iphone-18-pro" class="btn btn-brand mt-auto">Details</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 17" data-price="429999">
+          <div class="pcard">
+            <div class="pimg pimg-emoji">📱</div>
+            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 17 Pro</h3><span class="badge-pta">PTA approved</span></div>
+            <small>3 colors · 2 storage options</small>
+            <div class="price">From Rs 429,999</div>
+            <a href="product_details.html?model=iphone-17-pro" class="btn btn-brand mt-auto">Details</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 17" data-price="299999">
+          <div class="pcard">
+            <div class="pimg pimg-emoji">📱</div>
+            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 17</h3><span class="badge-pta">PTA approved</span></div>
+            <small>3 colors · 2 storage options</small>
+            <div class="price">From Rs 299,999</div>
+            <a href="product_details.html?model=iphone-17" class="btn btn-brand mt-auto">Details</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone Air" data-price="349999">
+          <div class="pcard">
+            <div class="pimg pimg-emoji">📱</div>
+            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone Air</h3><span class="badge-pta">PTA approved</span></div>
+            <small>2 colors · 2 storage options</small>
+            <div class="price">From Rs 349,999</div>
+            <a href="product_details.html?model=iphone-air" class="btn btn-brand mt-auto">Details</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 17e" data-price="189999">
+          <div class="pcard">
+            <div class="pimg pimg-emoji">📱</div>
+            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 17e</h3><span class="badge-pta">PTA approved</span></div>
+            <small>2 colors · 2 storage options</small>
+            <div class="price">From Rs 189,999</div>
+            <a href="product_details.html?model=iphone-17e" class="btn btn-brand mt-auto">Details</a>
+          </div>
+        </div>
+      </div>
+
+        <!-- <section class="panel mb-5 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div><h2 class="section-title h5 mb-1">Have an old iPhone?</h2><p class="text-secondary mb-0">Exchange a PTA-approved iPhone and pay only the difference.</p></div>
+            <a href="index.html#offers" class="btn btn-brand px-4">Exchange now</a>
+        </section> -->
+    </main>
+
+{% endblock %}

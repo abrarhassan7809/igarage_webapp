@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <main class="container py-4">
+      <!-- Breadcrumb navigation -->
+      <nav class="crumb mb-3">
+        <a href="/">Home</a> / <a href="/products_page/">{{ product.category.name if product.category else 'Products' }}</a> / <span id="crumbName">{{ product.name }}</span>
+      </nav>
+
+      <div class="row g-4 mb-5">
+        <!-- Left Column: Main Image & Thumbnail Gallery -->
+        <div class="col-lg-6">
+          <div class="card p-3 border rounded-3 bg-white text-center shadow-sm mb-3">
+            <div class="pimg pimg-lg d-flex align-items-center justify-content-center" style="min-height: 380px;">
+              <img id="dImg" src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid rounded" style="max-height: 360px; object-fit: contain;">
+            </div>
+          </div>
+
+          <!-- Thumbnail Gallery -->
+          <div class="d-flex gap-2 justify-content-start flex-wrap" id="dThumbnails">
+            <button class="btn p-1 border rounded active-thumb border-danger" style="width: 65px; height: 65px;" onclick="changeMainImage('{{ product.image_url }}', this)">
+              <img src="{{ product.image_url }}" class="w-100 h-100 rounded" style="object-fit: cover;" alt="{{ product.name }}">
+            </button>
+            {% if product.additional_images %}
+              {% for img in product.additional_images.split(',') %}
+              <button class="btn p-1 border rounded" style="width: 65px; height: 65px;" onclick="changeMainImage('{{ img.strip() }}', this)">
+                <img src="{{ img.strip() }}" class="w-100 h-100 rounded" style="object-fit: cover;" alt="Thumbnail">
+              </button>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Right Column: Product Specs & Ordering Controls -->
+        <div class="col-lg-6">
+          <h1 class="h3 fw-bold mb-1" id="dName">{{ product.name }}</h1>
+          <div class="text-secondary small mb-2">Brand: <span class="fw-semibold text-dark">{{ product.brand or 'Apple' }}</span></div>
+          <div class="text-secondary small mb-3">{{ product.warranty or '2 Year (Apple + Mercantile) Warranty' }}</div>
+
+          <!-- Price Range / Current Price -->
+          <div class="price fs-3 fw-bold text-danger mb-3" id="dPrice">
+            {% if product.max_price and product.max_price > product.discount_price %}
+              Rs {{ "{:,.0f}".format(product.discount_price) }} – Rs {{ "{:,.0f}".format(product.max_price) }}
+            {% else %}
+              Rs {{ "{:,.0f}".format(product.discount_price) }}
+            {% endif %}
+          </div>
+
+          <!-- Color Selector -->
+          {% if product.colors %}
+          <div class="mb-3">
+            <label class="fw-semibold small d-block mb-1">Color : <span class="text-danger fw-bold" id="dColor">{{ product.colors.split(',')[0] }}</span></label>
+            <div class="d-flex gap-2 flex-wrap" id="dSwatches">
+              {% for color in product.colors.split(',') %}
+              <button class="btn {% if loop.first %}btn-dark active{% else %}btn-outline-dark{% endif %} btn-sm px-3 rounded-2" onclick="selectColor('{{ color.strip() }}', this)">{{ color.strip() }}</button>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Storage Selector -->
+          {% if product.storage_options %}
+          <div class="mb-3">
+            <label class="fw-semibold small d-block mb-1">Storage : <span class="text-danger fw-bold" id="dStorageLabel">{{ product.storage_options.split(',')[0] }}</span></label>
+            <div class="d-flex gap-2 flex-wrap mb-1" id="dStorage">
+              {% for storage in product.storage_options.split(',') %}
+              <button class="btn {% if loop.first %}btn-dark active{% else %}btn-outline-dark{% endif %} btn-sm px-3 rounded-2" onclick="selectStorage('{{ storage.strip() }}', '{{ "{:,.0f}".format(product.discount_price) }}', this)">{{ storage.strip() }}</button>
+              {% endfor %}
+            </div>
+            <a href="javascript:void(0)" class="small text-danger text-decoration-none" onclick="resetSelections()">Clear</a>
+          </div>
+          {% endif %}
+
+          <!-- Additional Benefits Info -->
+          {% if product.benefits %}
+          <div class="p-3 border rounded-3 bg-light mb-3">
+            <h6 class="fw-bold mb-2">Additional Benefits</h6>
+            <p class="small text-secondary mb-0">{{ product.benefits }}</p>
+          </div>
+          {% endif %}
+
+          <!-- Selected Price & Stock Status -->
+          <div class="mb-3">
+            <div class="fs-4 fw-bold text-danger" id="selectedPrice">Rs {{ "{:,.0f}".format(product.discount_price) }}</div>
+            <div class="small {% if product.stock_quantity > 0 %}text-success{% else %}text-danger{% endif %}" id="stockStatus">
+              {% if product.stock_quantity > 0 %}In stock ({{ product.stock_quantity }} available){% else %}Out of stock{% endif %}
+            </div>
+          </div>
+
+          <!-- Quantity + Add To Cart Row -->
+          <div class="d-flex gap-2 align-items-center mb-3">
+            <div class="input-group input-group-sm" style="max-width: 110px;">
+              <button class="btn btn-outline-secondary" type="button" onclick="adjustQty(-1)">-</button>
+              <input type="text" class="form-control text-center" id="qtyInput" value="1" readonly>
+              <button class="btn btn-outline-secondary" type="button" onclick="adjustQty(1)">+</button>
+            </div>
+            <button class="btn btn-secondary flex-grow-1 py-2 fw-semibold" id="btnAddToCart">Add To Cart</button>
+          </div>
+
+          <!-- Buy Now Button -->
+          <div class="d-flex gap-2 mb-3">
+            <button class="btn btn-outline-dark flex-grow-1 py-2 fw-semibold">Buy Now</button>
+            <button class="btn btn-outline-secondary px-3" title="Compare"><i class="bi bi-arrow-repeat"></i> ↻</button>
+          </div>
+
+          <!-- Instalment Plans Button -->
+          <button class="btn btn-danger w-100 py-2 fw-bold">Instalment Plans</button>
+        </div>
+      </div>
+
+      <!-- Specifications Section -->
+      <section class="panel mb-5 p-4 border rounded-3 bg-white shadow-sm">
+        <h2 class="section-title h5 mb-3 fw-bold">Specifications</h2>
+        <ul class="spec list-unstyled mb-0">
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Display</span><span class="text-end fw-semibold" id="sDisplay">{{ product.display_spec or 'OLED Display' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Chip</span><span class="text-end fw-semibold" id="sChip">{{ product.chip_spec or 'Apple Silicon' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Port</span><span class="text-end fw-semibold">{{ product.port_spec or 'USB-C' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Water resistance</span><span class="text-end fw-semibold">{{ product.water_resistance or 'IP68' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Connectivity</span><span class="text-end fw-semibold">{{ product.connectivity or '5G, Wi-Fi, Bluetooth' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Colors</span><span class="text-end fw-semibold" id="sColors">{{ product.colors or 'Standard' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Storage Options</span><span class="text-end fw-semibold" id="sStorage">{{ product.storage_options or 'Standard' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Warranty</span><span class="text-end fw-semibold">{{ product.warranty or 'Official Warranty' }}</span></li>
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>PTA status</span><span class="text-end fw-semibold {% if product.pta_approved %}text-success{% else %}text-warning{% endif %}">{% if product.pta_approved %}Approved{% else %}Not Approved{% endif %}</span></li>
+        </ul>
+      </section>
+    </main>
+
+    <script>
+      function changeMainImage(src, btn) {
+        document.getElementById('dImg').src = src;
+        document.querySelectorAll('#dThumbnails button').forEach(b => b.classList.remove('border-danger', 'active-thumb'));
+        btn.classList.add('border-danger', 'active-thumb');
+      }
+
+      function selectColor(color, btn) {
+        document.getElementById('dColor').innerText = color;
+        document.querySelectorAll('#dSwatches button').forEach(b => {
+          b.classList.remove('btn-dark', 'active');
+          b.classList.add('btn-outline-dark');
+        });
+        btn.classList.remove('btn-outline-dark');
+        btn.classList.add('btn-dark', 'active');
+      }
+
+      function selectStorage(storage, price, btn) {
+        document.getElementById('dStorageLabel').innerText = storage;
+        document.getElementById('selectedPrice').innerText = 'Rs ' + price;
+        document.querySelectorAll('#dStorage button').forEach(b => {
+          b.classList.remove('btn-dark', 'active');
+          b.classList.add('btn-outline-dark');
+        });
+        btn.classList.remove('btn-outline-dark');
+        btn.classList.add('btn-dark', 'active');
+      }
+
+      function adjustQty(amount) {
+        const qty = document.getElementById('qtyInput');
+        let val = parseInt(qty.value) + amount;
+        if (val >= 1) qty.value = val;
+      }
+
+      function resetSelections() {
+        const firstColor = document.querySelector('#dSwatches button');
+        const firstStorage = document.querySelector('#dStorage button');
+        if (firstColor) firstColor.click();
+        if (firstStorage) firstStorage.click();
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/details.js"></script>
+{% endblock %}
