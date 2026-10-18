@@ -1,145 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Exchange — i Garage</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-<link href="/static/css/style.css" rel="stylesheet">
-</head>
-<body>
-<!-- Header -->
-<header class="topbar">
-  <div class="container d-flex align-items-center justify-content-between py-2">
-    <div class="d-flex align-items-center gap-2">
-      <button class="btn p-1 d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-label="Open menu"><i class="bi bi-list fs-2"></i></button>
-      <a class="logo" href="/"><img src="/img/igarage-logo.jpeg" alt="i Garage" class="brand-img"></a>
-    </div>
-    <nav class="d-none d-lg-flex">
-      <a class="nav-link" href="/iphones/">iPhone</a>
-      <a class="nav-link" href="/accessories/">Accessories</a>
-      <a class="nav-link" href="/services/">Services</a>
-      <a class="nav-link active" href="/exchange/">Exchange</a>
-    </nav>
-    <a href="index.html#resellers" class="btn p-1" aria-label="Find a reseller"><i class="bi bi-geo-alt fs-4"></i></a>
-  </div>
-</header>
+{% extends 'base.html' %}
 
-<!-- Slide-in menu -->
-<div class="offcanvas offcanvas-start dark" id="menu" tabindex="-1">
-  <div class="offcanvas-header"><span class="logo"><img src="img/i-garage-logo.jpeg" alt="i Garage" class="brand-img"></span><button class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
-  <div class="offcanvas-body"><div class="list-group list-group-flush">
-    <a class="list-group-item" data-bs-dismiss="offcanvas" href="iphone.html">iPhone</a>
-    <a class="list-group-item" data-bs-dismiss="offcanvas" href="accessories.html">Accessories</a>
-    <a class="list-group-item" data-bs-dismiss="offcanvas" href="services.html">Services</a>
-    <a class="list-group-item" data-bs-dismiss="offcanvas" href="exchange.html">Exchange</a>
-  </div></div>
-</div>
+{% block body %}
+    <main class="container py-3">
 
-<main class="container py-3">
-
-  <nav class="crumb mb-2"><a href="index.html">Home</a> / Exchange</nav>
-  <div class="page-hero mb-4">
-    <h1>Exchange your iPhone</h1>
-    <p class="mb-0 opacity-75">Trade in a PTA-approved iPhone and pay only the difference.</p>
-  </div>
-
-  <!-- Estimator: values live in the option value / data-* attributes below -->
-  <section id="estimate" class="mb-5"><div class="panel">
-    <h2 class="section-title h4">Get an estimate</h2>
-    <p class="text-secondary">Choose your old iPhone, its condition and the new one you want.</p>
-    <div class="row g-2 mb-3">
-      <div class="col-12 col-md-4"><label class="form-label small fw-semibold" for="oldModel">Your iPhone</label>
-        <select id="oldModel" class="form-select"><option value="260000">iPhone 17 Pro</option><option value="200000">iPhone 17</option><option value="190000">iPhone Air</option><option value="110000">iPhone 17e</option><option value="180000">iPhone 16 Pro</option><option value="120000">iPhone 16</option><option value="90000">iPhone 15</option></select></div>
-      <div class="col-12 col-md-4"><label class="form-label small fw-semibold" for="cond">Condition</label>
-        <select id="cond" class="form-select"><option value="1.0">Excellent — like new</option><option value="0.85">Good — light scratches</option><option value="0.65">Fair — visible wear</option></select></div>
-      <div class="col-12 col-md-4"><label class="form-label small fw-semibold" for="newModel">New iPhone</label>
-        <select id="newModel" class="form-select"><option value="549999">iPhone 18 Pro Max</option><option value="479999">iPhone 18 Pro</option><option value="429999">iPhone 17 Pro</option><option value="299999">iPhone 17</option><option value="349999">iPhone Air</option><option value="189999">iPhone 17e</option></select></div>
-    </div>
-    <div class="row g-2 text-center">
-      <div class="col-6"><div class="panel"><div class="small text-secondary">Estimated trade-in value</div><div class="price fs-4 mb-0" id="valOld"></div></div></div>
-      <div class="col-6"><div class="panel"><div class="small text-secondary">You pay about</div><div class="price fs-4 mb-0" id="valPay"></div></div></div>
-    </div>
-    <p class="small text-secondary mt-2 mb-0">Estimate only. The final value is confirmed after inspection at the store.</p>
-  </div></section>
-
-  <section class="mb-5">
-    <h2 class="section-title h4 mb-3">How it works</h2>
-    <div class="row g-3">
-      <div class="col-12 col-md-4"><div class="panel h-100"><span class="badge-pta">Step 1</span><h3 class="h6 mt-2">Bring your iPhone</h3><p class="small text-secondary mb-0">Visit an authorized reseller with your PTA-approved iPhone.</p></div></div>
-      <div class="col-12 col-md-4"><div class="panel h-100"><span class="badge-pta">Step 2</span><h3 class="h6 mt-2">Get your value</h3><p class="small text-secondary mb-0">We check the condition and confirm the trade-in value.</p></div></div>
-      <div class="col-12 col-md-4"><div class="panel h-100"><span class="badge-pta">Step 3</span><h3 class="h6 mt-2">Pay the difference</h3><p class="small text-secondary mb-0">Choose your new iPhone and pay only the difference.</p></div></div>
-    </div>
-  </section>
-
-  <section class="mb-5"><div class="row g-3">
-    <div class="col-12 col-md-6"><div class="panel h-100"><h2 class="section-title h5">What we accept</h2>
-      <ul class="list-unstyled small mb-0">
-        <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>PTA-approved iPhones only</li>
-        <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>Phone turns on and works normally</li>
-        <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>Not blacklisted or reported stolen</li></ul></div></div>
-    <div class="col-12 col-md-6"><div class="panel h-100"><h2 class="section-title h5">Before you come</h2>
-      <ul class="list-unstyled small mb-0">
-        <li class="mb-1"><i class="bi bi-1-circle-fill text-primary me-2"></i>Back up your data</li>
-        <li class="mb-1"><i class="bi bi-2-circle-fill text-primary me-2"></i>Sign out of iCloud and turn off Find My</li>
-        <li class="mb-1"><i class="bi bi-3-circle-fill text-primary me-2"></i>Bring your ID and the original box if you have it</li></ul></div></div>
-  </div></section>
-
-  <!-- Request form (calls POST /api/exchange) -->
-  <section id="request" class="mb-5"><div class="panel">
-    <h2 class="section-title h4">Request an exchange</h2>
-    <p class="text-secondary">We will use the details you selected above and call you to confirm.</p>
-    <form id="exForm" class="row g-2" novalidate>
-      <div class="col-12 col-md-6"><input id="exName" class="form-control" placeholder="Your name" aria-label="Name"></div>
-      <div class="col-12 col-md-6"><input id="exPhone" type="tel" class="form-control" placeholder="Phone number" aria-label="Phone"></div>
-      <div class="col-12"><button class="btn btn-brand px-4" type="submit">Send request</button></div>
-    </form>
-    <div id="exMsg" class="small mt-2" aria-live="polite"></div>
-  </div></section>
-
-  <section class="mb-5">
-    <h2 class="section-title h4 mb-3">Questions</h2>
-    <div class="accordion" id="faq">
-      <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f0">Is the estimate final?</button></h3>
-        <div id="f0" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body small text-secondary">No. The final value is confirmed after the store inspects your iPhone.</div></div></div>
-      <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f1">Can I trade in a damaged iPhone?</button></h3>
-        <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body small text-secondary">Yes, if it still works. Damage lowers the value.</div></div></div>
-      <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">How long does it take?</button></h3>
-        <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body small text-secondary">Usually about 15 to 30 minutes in store.</div></div></div>
-    </div>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer class="pt-4"><div class="container">
-  <div class="row g-4 pb-4">
-    <div class="col-6 col-md-4"><h3>Shop Now</h3><ul>
-      <li><a href="iphone.html">iPhone</a></li><li><a href="accessories.html">Accessories</a></li>
-      <li><a href="services.html">Services</a></li><li><a href="exchange.html">Exchange</a></li>
-    </ul></div>
-    <div class="col-6 col-md-4"><h3>Quick Links &amp; Support</h3><ul>
-      <li><a href="#">About Us</a></li><li><a href="#">Contact Us</a></li>
-      <li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li>
-    </ul></div>
-    <div class="col-12 col-md-4"><h3>Connect With Us</h3>
-      <div class="d-flex gap-2 social mb-3">
-        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <nav class="crumb mb-2 reveal"><a href="/">Home</a> / Exchange</nav>
+      <div class="page-hero mb-4 reveal">
+        <h1>Exchange your iPhone</h1>
+        <p class="mb-0 opacity-75">Trade in a PTA-approved iPhone and pay only the difference.</p>
       </div>
-      <form id="subForm" class="input-group" novalidate>
-        <input id="email" type="email" class="form-control" placeholder="Your email" aria-label="Email">
-        <button class="btn btn-brand" type="submit">Subscribe</button>
-      </form>
-      <div id="subMsg" class="small mt-1" aria-live="polite"></div>
-    </div>
-  </div>
-  <div class="foot-bottom py-3 text-center"><small>&copy; 2026 i Garage. All rights reserved.</small></div>
-</div></footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/static/js/main.js"></script>
-<script src="/static/js/exchange.js"></script>
-</body>
-</html>
+      <!-- Estimator Section -->
+      <section id="estimate" class="mb-5 reveal"><div class="panel">
+        <h2 class="section-title h4">Get an estimate</h2>
+        <p class="text-secondary">Choose your old iPhone, its condition and the new one you want.</p>
+        <div class="row g-2 mb-3">
+          <div class="col-12 col-md-4"><label class="form-label small fw-semibold" for="oldModel">Your iPhone</label>
+            <select id="oldModel" class="form-select"><option value="260000">iPhone 17 Pro</option><option value="200000">iPhone 17</option><option value="190000">iPhone Air</option><option value="110000">iPhone 17e</option><option value="180000">iPhone 16 Pro</option><option value="120000">iPhone 16</option><option value="90000">iPhone 15</option></select></div>
+          <div class="col-12 col-md-4"><label class="form-label small fw-semibold" for="cond">Condition</label>
+            <select id="cond" class="form-select"><option value="1.0">Excellent — like new</option><option value="0.85">Good — light scratches</option><option value="0.65">Fair — visible wear</option></select></div>
+          <div class="col-12 col-md-4"><label class="form-label small fw-semibold" for="newModel">New iPhone</label>
+            <select id="newModel" class="form-select"><option value="549999">iPhone 18 Pro Max</option><option value="479999">iPhone 18 Pro</option><option value="429999">iPhone 17 Pro</option><option value="299999">iPhone 17</option><option value="349999">iPhone Air</option><option value="189999">iPhone 17e</option></select></div>
+        </div>
+        <div class="row g-2 text-center">
+          <div class="col-6"><div class="panel"><div class="small text-secondary">Estimated trade-in value</div><div class="price fs-4 mb-0" id="valOld"></div></div></div>
+          <div class="col-6"><div class="panel"><div class="small text-secondary">You pay about</div><div class="price fs-4 mb-0" id="valPay"></div></div></div>
+        </div>
+        <p class="small text-secondary mt-2 mb-0">Estimate only. The final value is confirmed after inspection at the store.</p>
+      </div></section>
+
+      <!-- How it Works Section -->
+      <section class="mb-5 reveal">
+        <h2 class="section-title h4 mb-3">How it works</h2>
+        <div class="row g-3">
+          <div class="col-12 col-md-4 reveal delay-1"><div class="panel h-100"><span class="badge-pta">Step 1</span><h3 class="h6 mt-2">Bring your iPhone</h3><p class="small text-secondary mb-0">Visit an authorized reseller with your PTA-approved iPhone.</p></div></div>
+          <div class="col-12 col-md-4 reveal delay-2"><div class="panel h-100"><span class="badge-pta">Step 2</span><h3 class="h6 mt-2">Get your value</h3><p class="small text-secondary mb-0">We check the condition and confirm the trade-in value.</p></div></div>
+          <div class="col-12 col-md-4 reveal delay-3"><div class="panel h-100"><span class="badge-pta">Step 3</span><h3 class="h6 mt-2">Pay the difference</h3><p class="small text-secondary mb-0">Choose your new iPhone and pay only the difference.</p></div></div>
+        </div>
+      </section>
+
+      <!-- Acceptance & Prep Guide Section -->
+      <section class="mb-5 reveal"><div class="row g-3">
+        <div class="col-12 col-md-6 reveal delay-1"><div class="panel h-100"><h2 class="section-title h5">What we accept</h2>
+          <ul class="list-unstyled small mb-0">
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>PTA-approved iPhones only</li>
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>Phone turns on and works normally</li>
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>Not blacklisted or reported stolen</li></ul></div></div>
+        <div class="col-12 col-md-6 reveal delay-2"><div class="panel h-100"><h2 class="section-title h5">Before you come</h2>
+          <ul class="list-unstyled small mb-0">
+            <li class="mb-1"><i class="bi bi-1-circle-fill text-primary me-2"></i>Back up your data</li>
+            <li class="mb-1"><i class="bi bi-2-circle-fill text-primary me-2"></i>Sign out of iCloud and turn off Find My</li>
+            <li class="mb-1"><i class="bi bi-3-circle-fill text-primary me-2"></i>Bring your ID and the original box if you have it</li></ul></div></div>
+      </div></section>
+
+      <!-- Request Form Section -->
+      <section id="request" class="mb-5 reveal"><div class="panel">
+        <h2 class="section-title h4">Request an exchange</h2>
+        <p class="text-secondary">We will use the details you selected above and call you to confirm.</p>
+        <form id="exForm" class="row g-2" novalidate>
+          <div class="col-12 col-md-6"><input id="exName" class="form-control" placeholder="Your name" aria-label="Name"></div>
+          <div class="col-12 col-md-6"><input id="exPhone" type="tel" class="form-control" placeholder="Phone number" aria-label="Phone"></div>
+          <div class="col-12"><button class="btn btn-brand px-4" type="submit">Send request</button></div>
+        </form>
+        <div id="exMsg" class="small mt-2" aria-live="polite"></div>
+      </div></section>
+
+      <!-- FAQ Accordion Section -->
+      <section class="mb-5 reveal">
+        <h2 class="section-title h4 mb-3">Questions</h2>
+        <div class="accordion" id="faq">
+          <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f0">Is the estimate final?</button></h3>
+            <div id="f0" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body small text-secondary">No. The final value is confirmed after the store inspects your iPhone.</div></div></div>
+          <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f1">Can I trade in a damaged iPhone?</button></h3>
+            <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body small text-secondary">Yes, if it still works. Damage lowers the value.</div></div></div>
+          <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">How long does it take?</button></h3>
+            <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq"><div class="accordion-body small text-secondary">Usually about 15 to 30 minutes in store.</div></div></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/exchange.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px 0px -50px 0px",
+          threshold: 0.15
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+      });
+    </script>
+{% endblock %}

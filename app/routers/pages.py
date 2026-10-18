@@ -2,10 +2,13 @@
 from fastapi import APIRouter, Request, HTTPException, Depends
 from sqlalchemy.orm import Session
 from data import CATEGORIES, PRODUCTS, INDEX_PRODUCTS
-from ..config import STATIC_DIR
 from app.templating import templates
 from db_config.database import get_db
 from ..models.db_models.db_model import CategoryModel, ProductsModel
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+STATIC_DIR = BASE_DIR / "static"
 
 router = APIRouter(tags=["templates"])
 
@@ -25,7 +28,6 @@ def products_page(request: Request):
 
 @router.get("/product_details/")
 def product_details(request: Request, p_id: int):
-    # Ensure safe lookup by converting p_id to int or matching string keys
     product = PRODUCTS.get(p_id) or PRODUCTS.get(str(p_id))
 
     if not product:

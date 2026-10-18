@@ -1,7 +1,6 @@
 # api.py
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
 from sqlalchemy.orm import Session
-from config import STATIC_DIR
 from db_config.database import get_db
 from ..models.db_models.db_model import (
     ProductsModel, CategoryModel, ServicesModel, ExchangeModel
@@ -15,6 +14,10 @@ from ..models.schema_models.schema_model import (
 from typing import List, Optional
 import shutil
 import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+STATIC_DIR = BASE_DIR / "static"
 
 router = APIRouter(tags=["api"])
 

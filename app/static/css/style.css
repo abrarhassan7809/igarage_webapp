@@ -42,15 +42,11 @@ a{color:var(--brand-d)}
 .offcanvas.dark .list-group-item:hover{color:var(--nav-active)}
 .offcanvas.dark .btn-close{filter:invert(1)}
 
-.hero-slide{position:relative;border-radius:18px;overflow:hidden;color:#fff}
+.hero-slide{position:relative;border-radius:0;overflow:hidden;color:#fff}
 .hero-image{position:relative}
 .hero-image img{display:block;width:100%;height:auto}
-.hero-image::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,color-mix(in srgb,var(--deep) 70%,transparent) 0%,color-mix(in srgb,var(--deep) 60%,transparent) 45%,transparent 100%)}
 
 /* dark overlay ONLY when a slide has text */
-.hero-slide:has(.hero-content) .hero-image::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,color-mix(in srgb,var(--deep) 80%,transparent) 0%,color-mix(in srgb,var(--deep) 60%,transparent) 45%,transparent 100%)}
 .hero-content{position:absolute;z-index:2;top:50%;left:1.25rem;transform:translateY(-50%);max-width:75%;display:flex;flex-direction:column;align-items:flex-start}
 .hero-slide h2{font-weight:700;font-size:1.2rem;margin:0 0 .25rem}
 .hero-slide p{font-size:.8rem;margin:0 0 .65rem;opacity:.9}
@@ -88,7 +84,7 @@ a{color:var(--brand-d)}
 .btn-line{border:1px solid var(--line);border-radius:99px;background:#fff;font-weight:500}
 .badge-pta{background:var(--brand-soft);color:var(--brand-d);font-size:.72rem;font-weight:600;padding:.25rem .6rem;border-radius:99px;white-space:nowrap}
 .rail{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem}
-.news-card{min-width:78%;scroll-snap-align:start}
+.news-card{min-width:100%;scroll-snap-align:start}
 .trust i{font-size:1.6rem;color:var(--brand-d)}
 .compare-table td,.compare-table th{font-size:.85rem;vertical-align:middle}
 .crumb{font-size:.85rem;color:var(--mute)}
@@ -197,3 +193,54 @@ footer li{margin-bottom:.5rem;font-size:.9rem}
         object-fit: contain;
     }
 }
+
+/* Custom Smooth Load Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Add smooth transition for cards on hover */
+.pcard {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Smooth carousel slide transition enhancement */
+.carousel-item {
+  transition: transform 0.8s ease-in-out;
+}
+
+/* Scroll Reveal Initial Hidden State */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+/* Revealed State when Scrolled into View */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional Stagger Delay Classes */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }

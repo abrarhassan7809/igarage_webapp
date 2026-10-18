@@ -2,81 +2,95 @@
 
 {% block body %}
     <main class="container py-3">
-      <nav class="crumb mb-2"><a href="/">Home</a> / {{ category_name }}</nav>
-      <div class="page-hero mb-4">
-        <h1>iPhone</h1>
-        <p class="mb-0 opacity-75">PTA-approved iPhones with official warranty. Choose your model, color and storage.</p>
+      <nav class="crumb mb-2 reveal"><a href="/">Home</a> / All Products</nav>
+
+      <div class="page-hero mb-4 reveal">
+        <h1>Apple Lineup</h1>
+        <p class="mb-0 opacity-75">PTA-approved devices with official warranty. Choose your model, color and storage.</p>
       </div>
-      <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between mb-3">
-        <div class="chips mx-n3 mb-3" id="chips"><button class="chip active" data-value="All">All</button><button class="chip" data-value="iPhone 18">iPhone 18</button><button class="chip" data-value="iPhone 17">iPhone 17</button><button class="chip" data-value="iPhone Air">iPhone Air</button><button class="chip" data-value="iPhone 17e">iPhone 17e</button></div>
-        <select id="sort" class="form-select w-auto" aria-label="Sort">
-          <option value="def">Sort: Featured</option>
-          <option value="asc">Price: low to high</option>
-          <option value="desc">Price: high to low</option>
-        </select>
-      </div>
-      <div class="small text-secondary mb-2" id="count" aria-live="polite"></div>
-      <div class="row g-3 mb-5" id="grid">
-        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 18" data-price="549999">
-          <div class="pcard">
-            <div class="pimg pimg-emoji">📱</div>
-            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 18 Pro Max</h3><span class="badge-pta">PTA approved</span></div>
-            <small>3 colors · 3 storage options</small>
-            <div class="price">From Rs 549,999</div>
-            <a href="/product_details/" class="btn btn-brand mt-auto">Details</a>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 18" data-price="479999">
-          <div class="pcard">
-            <div class="pimg pimg-emoji">📱</div>
-            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 18 Pro</h3><span class="badge-pta">PTA approved</span></div>
-            <small>3 colors · 3 storage options</small>
-            <div class="price">From Rs 479,999</div>
-            <a href="product_details.html?model=iphone-18-pro" class="btn btn-brand mt-auto">Details</a>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 17" data-price="429999">
-          <div class="pcard">
-            <div class="pimg pimg-emoji">📱</div>
-            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 17 Pro</h3><span class="badge-pta">PTA approved</span></div>
-            <small>3 colors · 2 storage options</small>
-            <div class="price">From Rs 429,999</div>
-            <a href="product_details.html?model=iphone-17-pro" class="btn btn-brand mt-auto">Details</a>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 17" data-price="299999">
-          <div class="pcard">
-            <div class="pimg pimg-emoji">📱</div>
-            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 17</h3><span class="badge-pta">PTA approved</span></div>
-            <small>3 colors · 2 storage options</small>
-            <div class="price">From Rs 299,999</div>
-            <a href="product_details.html?model=iphone-17" class="btn btn-brand mt-auto">Details</a>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone Air" data-price="349999">
-          <div class="pcard">
-            <div class="pimg pimg-emoji">📱</div>
-            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone Air</h3><span class="badge-pta">PTA approved</span></div>
-            <small>2 colors · 2 storage options</small>
-            <div class="price">From Rs 349,999</div>
-            <a href="product_details.html?model=iphone-air" class="btn btn-brand mt-auto">Details</a>
-          </div>
-        </div>
-        <div class="col-12 col-sm-6 col-lg-4" data-cat="iPhone 17e" data-price="189999">
-          <div class="pcard">
-            <div class="pimg pimg-emoji">📱</div>
-            <div class="d-flex justify-content-between align-items-start mb-1 gap-2"><h3>iPhone 17e</h3><span class="badge-pta">PTA approved</span></div>
-            <small>2 colors · 2 storage options</small>
-            <div class="price">From Rs 189,999</div>
-            <a href="product_details.html?model=iphone-17e" class="btn btn-brand mt-auto">Details</a>
-          </div>
+
+      <div class="d-flex flex-column flex-sm-row gap-2 justify-content-between mb-3 reveal">
+        <div class="chips mx-n3 mb-3" id="chips">
+            <button class="chip active" data-value="All">All</button>
+            <button class="chip" data-value="iPhone">iPhone</button>
+            <button class="chip" data-value="Watch">Watch</button>
+            <button class="chip" data-value="AirPods">AirPods</button>
         </div>
       </div>
 
-        <!-- <section class="panel mb-5 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
-            <div><h2 class="section-title h5 mb-1">Have an old iPhone?</h2><p class="text-secondary mb-0">Exchange a PTA-approved iPhone and pay only the difference.</p></div>
-            <a href="index.html#offers" class="btn btn-brand px-4">Exchange now</a>
-        </section> -->
+      <div class="small text-secondary mb-2" id="count" aria-live="polite"></div>
+
+      <!-- Product Cards Grid with Staggered Scroll-Reveal Animation -->
+      <div class="row g-3 mb-5" id="grid">
+        {% for p_id, product in products.items() %}
+        <div class="col-12 col-sm-6 col-lg-3 reveal delay-{{ (loop.index0 % 4) + 1 }}"
+             data-cat="{{ product.category }}"
+             data-price="{{ product.discount_price }}">
+          <div class="pcard h-100 d-flex flex-column">
+            <div class="pimg">
+              <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy" style="max-height: 180px; object-fit: contain;">
+            </div>
+            <div class="d-flex justify-content-between align-items-start mb-1 gap-2 mt-2">
+              <h3>{{ product.name }}</h3>
+              {% if product.pta_approved %}
+                <span class="badge-pta">PTA approved</span>
+              {% endif %}
+            </div>
+
+            <!-- Conditionally show Details button -->
+            {% if product.id != 1 %}
+                <a href="/product_details/?p_id={{ product.id }}" class="btn btn-brand btn-sm mt-auto" data-compare="{{ product.name }}">Details</a>
+            {% else %}
+                <span class="badge bg-secondary text-white mt-auto py-2">Coming Soon</span>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </main>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Simple client-side filtering by category chips
+        const chips = document.querySelectorAll("#chips .chip");
+        const cards = document.querySelectorAll("#grid > div");
+
+        chips.forEach(chip => {
+          chip.addEventListener("click", function () {
+            chips.forEach(c => c.classList.remove("active"));
+            this.classList.add("active");
+            const val = this.getAttribute("data-value");
+
+            cards.forEach(card => {
+              const cat = card.getAttribute("data-cat");
+              if (val === "All" || cat === val) {
+                card.style.display = "";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Scroll Reveal Intersection Observer
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px 0px -50px 0px",
+          threshold: 0.15
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+      });
+    </script>
 {% endblock %}

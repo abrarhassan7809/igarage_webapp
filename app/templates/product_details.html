@@ -3,11 +3,11 @@
 {% block body %}
     <main class="container py-4">
       <!-- Breadcrumb navigation -->
-      <nav class="crumb mb-3">
+      <nav class="crumb mb-3 reveal">
         <a href="/">Home</a> / <a href="/products_page/">{{ product.category }}</a> / <span id="crumbName">{{ product.name }}</span>
       </nav>
 
-      <div class="row g-4 mb-5">
+      <div class="row g-4 mb-5 reveal">
         <!-- Left Column: Main Image & Thumbnail Gallery -->
         <div class="col-lg-6">
           <div class="card p-3 border rounded-3 bg-white text-center shadow-sm mb-3">
@@ -18,16 +18,24 @@
 
           <!-- Thumbnail Gallery -->
           <div class="d-flex gap-2 justify-content-start flex-wrap" id="dThumbnails">
-            <button class="btn p-1 border rounded active-thumb border-danger" style="width: 65px; height: 65px;" onclick="changeMainImage('{{ product.image_url }}', this)">
-              <img src="{{ product.image_url }}" class="w-100 h-100 rounded" style="object-fit: cover;" alt="{{ product.name }}">
-            </button>
+            {% set colors_list = product.colors.split(',') if product.colors else [] %}
+            {% set images_list = [product.image_url] %}
             {% if product.additional_images %}
-              {% for img in product.additional_images.split(',') %}
-              <button class="btn p-1 border rounded" style="width: 65px; height: 65px;" onclick="changeMainImage('{{ img.strip() }}', this)">
-                <img src="{{ img.strip() }}" class="w-100 h-100 rounded" style="object-fit: cover;" alt="Thumbnail">
-              </button>
+              {% for add_img in product.additional_images.split(',') %}
+                {% set _ = images_list.append(add_img.strip()) %}
               {% endfor %}
             {% endif %}
+
+            {% for img_url in images_list %}
+              {% set current_index = loop.index0 %}
+              {% set associated_color = colors_list[current_index].strip() if current_index < colors_list|length else (colors_list[0].strip() if colors_list else 'Default') %}
+
+              <button class="btn p-1 border rounded {% if loop.first %}active-thumb border-danger{% endif %}"
+                      style="width: 65px; height: 65px;"
+                      onclick="onThumbnailClick('{{ img_url }}', '{{ associated_color }}', this)">
+                <img src="{{ img_url }}" class="w-100 h-100 rounded" style="object-fit: cover;" alt="Thumbnail">
+              </button>
+            {% endfor %}
           </div>
         </div>
 
@@ -35,12 +43,12 @@
         <div class="col-lg-6">
           <h1 class="h3 fw-bold mb-1" id="dName">{{ product.name }}</h1>
           <div class="text-secondary small mb-2">Brand: <span class="fw-semibold text-dark">{{ product.brand or 'Apple' }}</span></div>
-          <div class="text-secondary small mb-3">{{ product.warranty or '2 Year Official Warranty' }}</div>
+          <div class="text-secondary small mb-3">{{ product.warranty or '1 Year Official Warranty' }}</div>
 
           <!-- Color Selector -->
           {% if product.colors %}
           <div class="mb-3">
-            <label class="fw-semibold small d-block mb-1">Color : <span class="text-danger fw-bold" id="dColor">{{ product.colors.split(',')[0] }}</span></label>
+            <label class="fw-semibold small d-block mb-1">Color : <span class="text-primary fw-bold" id="dColor">{{ product.colors.split(',')[0] }}</span></label>
             <div class="d-flex gap-2 flex-wrap" id="dSwatches">
               {% set images_list = [product.image_url] %}
               {% if product.additional_images %}
@@ -51,7 +59,6 @@
 
               {% for color in product.colors.split(',') %}
                 {% set color_trimmed = color.strip() %}
-                <!-- Map images sequentially to colors as fallback if specific mapping isn't defined -->
                 {% set mapped_img = images_list[loop.index0] if loop.index0 < images_list|length else product.image_url %}
                 <button class="btn {% if loop.first %}btn-dark active{% else %}btn-outline-dark{% endif %} btn-sm px-3 rounded-2"
                         onclick="selectColor('{{ color_trimmed }}', '{{ mapped_img }}', this)">
@@ -65,7 +72,7 @@
           <!-- Storage Selector -->
           {% if product.storage_options %}
           <div class="mb-3">
-            <label class="fw-semibold small d-block mb-1">Storage : <span class="text-danger fw-bold" id="dStorageLabel">{{ product.storage_options.split(',')[0] }}</span></label>
+            <label class="fw-semibold small d-block mb-1">Storage : <span class="text-primary fw-bold" id="dStorageLabel">{{ product.storage_options.split(',')[0] }}</span></label>
             <div class="d-flex gap-2 flex-wrap mb-1" id="dStorage">
               {% for storage in product.storage_options.split(',') %}
               <button class="btn {% if loop.first %}btn-dark active{% else %}btn-outline-dark{% endif %} btn-sm px-3 rounded-2" onclick="selectStorage('{{ storage.strip() }}', this)">
@@ -75,25 +82,11 @@
             </div>
           </div>
           {% endif %}
-
-          <!-- Stock Status -->
-          <div class="mb-3">
-            <div class="small {% if product and product.stock_quantity and product.stock_quantity > 0 %}text-success{% else %}text-danger{% endif %}" id="stockStatus">
-              {% if product and product.stock_quantity and product.stock_quantity > 0 %}
-                In stock ({{ product.stock_quantity }} available)
-              {% else %}
-                Out of stock
-              {% endif %}
-            </div>
-          </div>
-
-          <!-- Instalment Plans Button -->
-          <button class="btn btn-danger w-100 py-2 fw-bold">Instalment Plans</button>
         </div>
       </div>
 
       <!-- Specifications Section -->
-      <section class="panel mb-5 p-4 border rounded-3 bg-white shadow-sm">
+      <section class="panel mb-5 p-4 border rounded-3 bg-white shadow-sm reveal">
         <h2 class="section-title h5 mb-3 fw-bold">Specifications</h2>
 
         <h6 class="text-primary fw-bold mt-3 mb-2">Display and Design</h6>
@@ -122,6 +115,11 @@
           <li class="d-flex justify-content-between py-2 border-bottom"><span>Connectivity &amp; Port</span><span class="text-end fw-semibold">{{ product.port_spec | default('USB-C', true) }} / {{ product.connectivity | default('Standard', true) }}</span></li>
           <li class="d-flex justify-content-between py-2 border-bottom"><span>PTA Status</span><span class="text-end fw-semibold {% if product.pta_approved %}text-success{% else %}text-warning{% endif %}">{% if product.pta_approved %}Approved{% else %}Not Approved{% endif %}</span></li>
         </ul>
+
+        <h6 class="text-primary fw-bold mt-4 mb-2">Warranty</h6>
+        <ul class="spec list-unstyled mb-0">
+          <li class="d-flex justify-content-between py-2 border-bottom"><span>Warranty Term</span><span class="text-end fw-semibold">{{ product.warranty | default('N/A', true) }}</span></li>
+        </ul>
       </section>
     </main>
 
@@ -134,31 +132,41 @@
         }
       }
 
+      function onThumbnailClick(imageUrl, colorName, thumbBtn) {
+        changeMainImage(imageUrl, thumbBtn);
+
+        const colorButtons = document.querySelectorAll('#dSwatches button');
+        colorButtons.forEach(btn => {
+          if (btn.innerText.trim() === colorName) {
+            selectColor(colorName, imageUrl, btn);
+          }
+        });
+      }
+
       function selectColor(color, imageUrl, btn) {
-        // Update the selected color name label
         document.getElementById('dColor').innerText = color;
 
-        // Dynamically change the main product image and update the thumbnail border
         if (imageUrl) {
           document.getElementById('dImg').src = imageUrl;
 
-          // Find the matching thumbnail button based on the image source and highlight it
           const thumbButtons = document.querySelectorAll('#dThumbnails button');
           thumbButtons.forEach(thumbBtn => {
             const img = thumbBtn.querySelector('img');
             if (img && img.getAttribute('src') === imageUrl) {
-              changeMainImage(imageUrl, thumbBtn);
+              document.querySelectorAll('#dThumbnails button').forEach(b => b.classList.remove('border-danger', 'active-thumb'));
+              thumbBtn.classList.add('border-danger', 'active-thumb');
             }
           });
         }
 
-        // Toggle active button states for color swatches
         document.querySelectorAll('#dSwatches button').forEach(b => {
           b.classList.remove('btn-dark', 'active');
           b.classList.add('btn-outline-dark');
         });
-        btn.classList.remove('btn-outline-dark');
-        btn.classList.add('btn-dark', 'active');
+        if (btn) {
+          btn.classList.remove('btn-outline-dark');
+          btn.classList.add('btn-dark', 'active');
+        }
       }
 
       function selectStorage(storage, btn) {
@@ -170,5 +178,26 @@
         btn.classList.remove('btn-outline-dark');
         btn.classList.add('btn-dark', 'active');
       }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px 0px -50px 0px",
+          threshold: 0.15
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+      });
     </script>
 {% endblock %}
