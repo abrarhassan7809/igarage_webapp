@@ -40,7 +40,10 @@ def product_details(request: Request, p_id: int):
 
 @router.get("/accessories/")
 def accessories(request: Request):
-    return templates.TemplateResponse(request, "accessories_page.html", context={"STATIC_DIR": STATIC_DIR})
+    return templates.TemplateResponse(
+        request, "accessories_page.html",
+        context={"STATIC_DIR": STATIC_DIR, "categories": CATEGORIES, "products": PRODUCTS}
+    )
 
 @router.get("/services/")
 def services(request: Request):

@@ -43,7 +43,12 @@
         <div class="col-lg-6">
           <h1 class="h3 fw-bold mb-1" id="dName">{{ product.name }}</h1>
           <div class="text-secondary small mb-2">Brand: <span class="fw-semibold text-dark">{{ product.brand or 'Apple' }}</span></div>
-          <div class="text-secondary small mb-3">{{ product.warranty or '1 Year Official Warranty' }}</div>
+          <div class="text-secondary small mb-2">{{ product.warranty or '1 Year Official Warranty' }}</div>
+
+          <!-- Product Description Field -->
+          {% if product.description %}
+            <p class="text-dark large mb-3">{{ product.description }}</p>
+          {% endif %}
 
           <!-- Color Selector -->
           {% if product.colors %}
